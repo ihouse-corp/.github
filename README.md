@@ -1,13 +1,27 @@
-# ihouse-corp 默认社区文件
+# ihouse-corp .github
 
-这个仓库提供 ihouse-corp 的组织级说明和默认贡献规范。
+这个仓库是 ihouse-corp 的 GitHub 组织级特殊仓库，只放组织主页和默认社区文件。
 
-- 组织首页说明：[`profile/README.md`](profile/README.md)
+- 组织主页：[`profile/README.md`](profile/README.md)
 - 默认贡献规范：[`CONTRIBUTING.md`](CONTRIBUTING.md)
 
-## 写作口径
+## 使用边界
 
-- 默认使用中文说明规则、流程、结论和卡点。
-- GitHub / Actions / runner 相关官方术语保留英文，例如 `self-hosted runner`、`runner group`、`workflow_dispatch`、`required checks`。
-- 文件路径、workflow 名称、runner label、API 字段和命令保持原文，不翻译。
-- 如果仓库本身有更具体的 README / CONTRIBUTING / AGENTS.md，以仓库内更具体的规则为准。
+适合放在这里：
+
+- 组织级主页说明；
+- 没有自带贡献规范的仓库可继承的默认规则；
+- 跨仓通用的 GitHub 协作、安全和 PR 习惯。
+
+不放在这里：
+
+- 单个项目的运维 runbook、发布记录、事故记录或 backlog；
+- runner 实例清单、secret 当前状态、环境排障细节；
+- 任何明文 secret、token、private key、证书、`.env` 或 kubeconfig。
+
+如果某个仓库已有更具体的 `README.md`、`CONTRIBUTING.md`、`AGENTS.md` 或项目文档，以仓库内规则为准。
+
+## 参考
+
+- [GitHub Docs: Customizing your organization's profile](https://docs.github.com/en/organizations/collaborating-with-groups-in-organizations/customizing-your-organizations-profile)
+- [GitHub Docs: Creating a default community health file](https://docs.github.com/en/communities/setting-up-your-project-for-healthy-contributions/creating-a-default-community-health-file)
