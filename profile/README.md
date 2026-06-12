@@ -32,6 +32,8 @@
 
 - org-level review bot secrets 仍需后续在 secret 管理面重写为 selected repositories；在不知道原 secret value 的情况下，不直接改写密文。
 - runner group 的 selected workflows 可以进一步收窄，但需要逐组验证不会破坏 PR / reusable workflow 调度后再启用。
+- Web / Backend 的 container workflow 需要补明确 dry-run / smoke 入口，避免用带发布语义的 workflow 做 runner 健康检查。
+- iOS / Android dry-run 应避免占用 production environment；production environment 只用于真实 upload / publish / apply。
 - 生产 apply、真实 TestFlight upload、真实 Android support download publish 不作为日常 runner 健康检查入口。
 
 ## 参考
