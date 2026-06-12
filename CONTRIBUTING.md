@@ -72,6 +72,9 @@ runner label 只描述能力和调度意图，不替代 runner group、repositor
 
 - `CODEX_BOT_APP_ID`、`CODEX_BOT_PRIVATE_KEY`、`REVIEW_BOT_PROVIDER_API_KEY` 仍是 org-level secrets。GitHub 的常规更新路径需要重新提交加密后的 secret value；在不知道原值时，不直接重写。后续应通过 secret 管理面把它们改成 selected repositories。
 - runner group 的 selected workflows 还没有启用。这个优化需要按组验证 PR、`workflow_dispatch` 和 reusable workflow 调度后再收窄，避免误伤 CI。
+- Web / Backend 的 container workflow 在 `workflow_dispatch` 下有发布语义，不适合作为随手 runner 健康检查。后续应补明确的 dry-run / smoke 入口，或把手动容器验证与发布动作拆开。
+- iOS / Android 发布 workflow 的 dry-run 不应占用 production environment。后续应把 production environment 限定到真实 TestFlight upload、Android support download publish 或生产 apply 这类有副作用动作。
+- `jclaw-prod-deploy` runner group 当前作为生产部署能力边界保留；没有真实生产 apply 需求时，不用它做日常健康检查。
 
 ## GitHub Actions 权限
 
