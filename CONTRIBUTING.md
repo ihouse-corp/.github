@@ -36,6 +36,19 @@
 - smoke、dry-run、plan 和只读 drift check 应与真实发布动作分开，避免把健康检查做成生产操作。
 - 绿灯检查代表“当前 PR 可合并”的证据之一，不等于“已经发布”或“运行态已验证”。
 
+## Review Automation
+
+JClaw 生产/开发仓默认接入 `ihouse-corp/github-automation` 的
+`Review Automation`，并通过 `ihouse-review-bot[bot]` 发布 advisory review。
+
+- Review 默认在 PR `opened`、`reopened`、`synchronize`、`ready_for_review` 时触发。
+- Review 是当前 HEAD 的 advisory signal，不是 branch protection required check，也不替代 build/test/release gate。
+- push 新 commit 后，以最新 HEAD 的 review 结果为准；旧 HEAD 的 clean 或 finding 只能作为历史参考。
+- clean 结果必须来自有效 structured review artifact，并带有当前 HEAD 标记；只看到一句 `Didn't find any major issues.` 但没有当前 HEAD 证据时，不应当作完整验收。
+- P0/P1 finding 应以 inline PR review comment 出现；provider、runtime、schema 或 workflow failure 只能当 failure 处理，不能当 clean。
+- `.github` 和 `github-automation` 是组织默认社区文件仓与 helper 仓，不是默认 Review Automation consumer wrapper 覆盖对象。
+- `demo-repository` 是 demo/optional 仓，可以保持 workflow disabled，避免无效噪音。
+
 ## Runner 和权限边界
 
 `self-hosted runner` 默认按最小权限放置。
@@ -44,6 +57,7 @@
 - 多仓确实共享的 CI、review 或受控部署能力，可以注册为 organization runner。
 - organization runner 必须通过 runner group 限定 selected repositories。
 - runner label 只描述能力和调度意图，不替代 runner group、repository scope 或 secret boundary。
+- ARC 整体是 JClaw org 的基础设施能力；review 只是其中一条 runner lane。
 
 ## Secrets 和受控配置
 

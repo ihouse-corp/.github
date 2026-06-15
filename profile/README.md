@@ -10,6 +10,7 @@ ihouse-corp 承载 JClaw 相关的产品源码、发布仓、GitOps 仓和协作
 - 一个 PR 只做一件可解释、可 review、可回滚的变化。
 - issue、PR、checks、runbook 和发布记录是协作事实来源。
 - 仓库内更具体的 `README.md`、`CONTRIBUTING.md`、`AGENTS.md` 或项目文档优先于组织级默认规则。
+- JClaw 生产/开发仓默认使用 org ARC runner lanes，并由 `ihouse-review-bot[bot]` 提供当前 HEAD advisory review。
 
 ## 协作边界
 
