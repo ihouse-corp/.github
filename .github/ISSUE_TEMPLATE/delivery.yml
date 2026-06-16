@@ -1,0 +1,44 @@
+name: 交付任务 / Delivery
+description: 用于有明确交付目标的开发、文档、运维或发布任务。
+title: "[delivery] "
+body:
+  - type: textarea
+    id: background
+    attributes:
+      label: 背景
+      description: 为什么需要做这件事，当前问题或机会是什么。
+      placeholder: 简要说明上下文、相关仓库、相关 PR / run / 文档链接。
+    validations:
+      required: true
+  - type: textarea
+    id: goal
+    attributes:
+      label: 目标
+      description: 完成后应该达到什么状态。
+      placeholder: 写清楚可验证的交付结果。
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: 范围 / 约束
+      description: 明确包含和不包含的内容。
+      placeholder: 例如不改发布入口、不碰生产 secret、不扩展到其他仓。
+    validations:
+      required: true
+  - type: textarea
+    id: validation
+    attributes:
+      label: 验收
+      description: 需要哪些检查、CI、dry-run、smoke 或人工验证。
+      placeholder: 列出验收命令、GitHub Actions run、运行态验证方式。
+    validations:
+      required: true
+  - type: textarea
+    id: rollout
+    attributes:
+      label: 发布 / 回滚
+      description: 如果涉及发布或运行态，说明发布路径与回滚方式；不涉及可写 n/a。
+      placeholder: plan/apply、环境、owner、回滚锚点。
+    validations:
+      required: true

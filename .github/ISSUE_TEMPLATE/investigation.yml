@@ -1,0 +1,36 @@
+name: 联调排查 / Investigation
+description: 用于故障、CI 失败、环境异常、跨仓联调或运行态问题排查。
+title: "[investigation] "
+body:
+  - type: textarea
+    id: symptom
+    attributes:
+      label: 现象
+      description: 具体看到什么失败或异常。
+      placeholder: 错误文本、日志片段、失败 workflow/run、复现路径。
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: 已有证据
+      description: 已确认的事实，不写推测。
+      placeholder: 链接到 issue、PR、workflow run、日志、截图、监控或命令输出。
+    validations:
+      required: true
+  - type: textarea
+    id: boundary
+    attributes:
+      label: 排查边界
+      description: 当前怀疑的责任面和明确不在本轮处理的范围。
+      placeholder: 例如前端、后端、runner、secret、发布流程、外部平台。
+    validations:
+      required: true
+  - type: textarea
+    id: next_steps
+    attributes:
+      label: 下一步验证
+      description: 下一步要执行的最小验证动作。
+      placeholder: 命令、workflow、API 调用、人工验证步骤。
+    validations:
+      required: true
