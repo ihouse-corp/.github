@@ -19,6 +19,21 @@ consumer wrapper 覆盖对象。
 存在的 OIDC/WIF 继续保留。当前先这样，不额外加 repo-local 守门胶水；后续一边
 用一边优化，有问题先开 issue，再按 `issue -> PR -> 验证 -> closeout` 闭环。
 
+## AI 协作边界
+
+组织默认协作文件只落“协作纪律”，不默认把第三方 AI helper 当成组织工具链。
+
+- `Ponytail`：作为代码改动纪律参考吸收，强调少抽象、少依赖、少扩散、最小 diff。
+- `karpathy-skills`：作为协作增强价值吸收，强调少假设、明确 tradeoff、只改必要范围、先定义验证标准。
+- `Agent-Reach`：不进入 `ihouse-corp` 默认工具链。它可以作为个别仓库或个别操作者的外部调研 helper，但不是组织默认依赖，也不能替代 issue、PR、checks、runbook 和官方文档这些事实面。
+
+如果某个仓库确实需要引入额外 AI helper，应在该仓库自己的 issue / PR 中明确：
+
+- 为什么默认 GitHub / CI / review / 文档能力不够；
+- 新工具是原则参考、可选 helper，还是正式默认依赖；
+- 它会不会触碰本机账号、cookie、token、浏览器态或外部平台；
+- 验证和回退边界是什么。
+
 ## 使用边界
 
 适合放在这里：
