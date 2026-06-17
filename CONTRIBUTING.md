@@ -28,6 +28,17 @@
 
 `required checks` 不是独立仓库开关。它通过 branch protection 或 rulesets 强制执行。当前套餐或仓库设置不支持时，不能用文档口径假装已经强制生效。
 
+## 快速开发前最小治理基线
+
+- 当前先采用 GitHub 官方能力：`CODEOWNERS`、Dependabot for GitHub Actions、
+  reusable workflows，以及已有 OIDC/WIF。
+- `CODEOWNERS` 只做 owner review 路由，不是 Free plan 硬门禁替代物。
+- Dependabot 本轮只维护 GitHub Actions，不默认扩张到 npm、Go、Gradle、
+  Bundler 等依赖生态。
+- 后续一边用一边优化；发现 CI、review、runner、发布或凭证问题时，先开 issue，
+  写清现象、影响和建议，再按 `issue -> PR -> 验证 -> closeout` 闭环。
+- 当前不额外加 repo-local PR guard、merge controller 或自研审批胶水。
+
 ## GitHub Actions
 
 - 默认 `GITHUB_TOKEN` 权限保持最小化。
