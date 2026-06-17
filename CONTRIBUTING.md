@@ -39,6 +39,15 @@
   写清现象、影响和建议，再按 `issue -> PR -> 验证 -> closeout` 闭环。
 - 当前不额外加 repo-local PR guard、merge controller 或自研审批胶水。
 
+## AI 协作默认口径
+
+- 组织级默认只吸收可复用的协作纪律，不默认要求团队安装第三方 AI skill pack、CLI helper 或本机浏览器/账号型工具。
+- `Ponytail` 一类材料适合作为代码改动纪律参考：少抽象、少依赖、少扩散、最小 diff。
+- `karpathy-skills` 一类材料适合作为协作方法参考：少假设、明确 tradeoff、只改必要范围、先定义验证标准。
+- `Agent-Reach` 不属于 `ihouse-corp` 默认工具链。它如果被个别仓库采用，只能作为可选外部调研 helper，不能替代官方文档、issue/PR、checks、日志和 runbook 这些正式事实面。
+- 任何会触碰本机 cookie、token、浏览器登录态、第三方账号或额外平台权限的工具，都不能只靠组织默认文档直接推广为“大家默认可用”。
+- 某个仓库如果要正式引入新的 AI helper、skill bundle 或 operator wrapper，必须在该仓库自己的 issue / PR 中说明用途、边界、验证方式、失败退路，以及为什么 GitHub 官方能力或现有组织默认能力不足。
+
 ## GitHub Actions
 
 - 默认 `GITHUB_TOKEN` 权限保持最小化。
