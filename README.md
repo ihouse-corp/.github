@@ -29,6 +29,23 @@ consumer wrapper 覆盖对象。
   security surface 的更新：仍然需要人工审查，不能按低风险 PR 直接放行；
 - Review Automation 继续只作为 advisory signal，不作为这个 org 默认规则的硬门禁。
 
+## 仓库层治理边界
+
+仓库自己的 README、CONTRIBUTING 和 AGENTS 只保留 repo-specific delta：
+
+- 仓库专属边界、例外、验证和回滚说明；
+- 明确高于 org default 的特殊门禁；
+- 该仓库独有的 workflow、runner、发布、环境或密钥约束。
+
+不建议在仓库层重复这些组织默认段落：
+
+- Review Automation 的基本触发 / 信号定义；
+- Dependabot 的风险分级口径；
+- AI 协作默认口径；
+- CODEOWNERS / reusable workflows / org runner lanes 这类通用治理基线。
+
+如果仓库需要覆盖 org default，必须写清楚覆盖原因、影响范围和验证方式。
+
 ## AI 协作边界
 
 组织默认协作文件只落“协作纪律”，不默认把第三方 AI helper 当成组织工具链。
