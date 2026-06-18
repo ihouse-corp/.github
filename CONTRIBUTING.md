@@ -18,6 +18,23 @@
 - 默认 squash merge，合并后删除 head branch。
 - 被替代或不再适合合并的 PR 应说明事实依据后关闭，避免长期噪音。
 
+## 仓库层文档写法
+
+仓库自己的 README、CONTRIBUTING 和 AGENTS 只写 repo-specific delta：
+
+- 仓库专属边界、例外、验证和回滚；
+- 明确高于 org default 的特殊门禁；
+- 该仓库独有的 workflow、runner、发布、环境或密钥约束。
+
+共享治理基线应该引用 org default，不要在每个仓库重复一整套相同段落，尤其是：
+
+- Review Automation 基本信号和 merge 纪律；
+- Dependabot 风险分级；
+- AI 协作默认口径；
+- CODEOWNERS / reusable workflows / org runner lanes 这类通用治理。
+
+如果仓库确实需要覆盖 org default，必须写清楚覆盖原因、影响范围和验证方式。
+
 仓库需要硬门禁时，优先使用 GitHub 原生能力：
 
 - 合并前必须有 pull request；
