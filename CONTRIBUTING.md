@@ -69,6 +69,17 @@ JClaw 生产/开发仓默认接入 `ihouse-corp/github-automation` 的
 - `.github` 和 `github-automation` 是组织默认社区文件仓与 helper 仓，不是默认 Review Automation consumer wrapper 覆盖对象。
 - `demo-repository` 是 demo/optional 仓，可以保持 workflow disabled，避免无效噪音。
 
+## Dependabot 默认口径
+
+组织级默认把 Dependabot PR 分成两档：
+
+- 低风险 patch / minor 更新：required checks 全绿且人工确认 diff 后，可以不等
+  clean review 直接合并；
+- major bump，或涉及 GitHub Actions、runner、permissions、release、
+  security surface 的更新：仍然需要人工审查，不能按低风险 PR 直接放行；
+- 如果某个仓库的 `AGENTS.md`、issue 或 runbook 明确要求更严格门禁，以该仓库
+  自己的规则为准。
+
 ## Runner 和权限边界
 
 `self-hosted runner` 默认按最小权限放置。

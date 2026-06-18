@@ -19,6 +19,16 @@ consumer wrapper 覆盖对象。
 存在的 OIDC/WIF 继续保留。当前先这样，不额外加 repo-local 守门胶水；后续一边
 用一边优化，有问题先开 issue，再按 `issue -> PR -> 验证 -> closeout` 闭环。
 
+## Dependabot 默认口径
+
+组织级默认按风险分级处理 Dependabot PR：
+
+- 低风险 patch / minor 更新：required checks 全绿且人工确认 diff 后，可以不等
+  clean review 直接合并；
+- major bump，或涉及 GitHub Actions、runner、permissions、release、
+  security surface 的更新：仍然需要人工审查，不能按低风险 PR 直接放行；
+- Review Automation 继续只作为 advisory signal，不作为这个 org 默认规则的硬门禁。
+
 ## AI 协作边界
 
 组织默认协作文件只落“协作纪律”，不默认把第三方 AI helper 当成组织工具链。
