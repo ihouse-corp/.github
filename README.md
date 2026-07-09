@@ -17,7 +17,8 @@ consumer wrapper 覆盖对象。
 快速开发前的默认治理口径是 GitHub 官方能力优先：`CODEOWNERS` 做最小 owner
 路由，Dependabot 只维护 GitHub Actions，跨仓复用走 reusable workflows，已经
 存在的 OIDC/WIF 继续保留。当前先这样，不额外加 repo-local 守门胶水；后续一边
-用一边优化，有问题先开 issue，再按 `issue -> PR -> 验证 -> closeout` 闭环。
+用一边优化，有问题先开 issue，再按 `issue -> PR -> 验证 -> closeout` 闭环；
+closeout ownership 细节见 [`CONTRIBUTING.md`](CONTRIBUTING.md)。
 
 ## Dependabot 默认口径
 
