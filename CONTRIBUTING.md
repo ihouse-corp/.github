@@ -56,6 +56,21 @@
   写清现象、影响和建议，再按 `issue -> PR -> 验证 -> closeout` 闭环。
 - 当前不额外加 repo-local PR guard、merge controller 或自研审批胶水。
 
+## Issue closeout ownership
+
+Issue closeout 默认按 ownership 判断。owner 顺序固定为：
+
+1. explicit assignee / issue body 指定 owner / runbook verifier
+2. issue author
+3. repo owner emergency governance
+
+执行者处理 closeout 时遵守：
+
+- 当前账号自己开的 issue，且验收明确满足时，可以留下 evidence comment 并关闭。
+- 别人开的 issue 默认不直接关闭；执行者应留下 closeout evidence，并请求 owner 确认或关闭。
+- 如果 owner 不明确，先留下 evidence 和当前停止点，再询问可能的 owner，不用猜测关闭。
+- 对 release、deployment、runner、secret、permission 或 production-impacting 任务，PR merge 不等于 done；必须完成对应运行态或交付面验收后，才能 closeout。
+
 ## AI 协作默认口径
 
 - 组织级默认只吸收可复用的协作纪律，不默认要求团队安装第三方 AI skill pack、CLI helper 或本机浏览器/账号型工具。
