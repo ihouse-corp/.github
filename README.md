@@ -14,6 +14,11 @@ JClaw 生产/开发仓默认使用 org ARC runner lanes 承载 CI、review、Doc
 `.github` 仓自身只维护组织主页和默认社区文件，不作为 Review Automation
 consumer wrapper 覆盖对象。
 
+新仓库的 CI 从组织 workflow 模板起步：Actions → New workflow →
+“Self-hosted Linux CI (org ARM64 runners)”（[`workflow-templates/`](workflow-templates/)）。
+模板默认 `runs-on: ${{ vars.LINUX_CI_RUNNER || 'gx10-jclaw-org-ci-arm64' }}`，
+不使用 GitHub-hosted runner；仓库需先加入 runner group `jclaw-linux-ci`。
+
 快速开发前的默认治理口径是 GitHub 官方能力优先：`CODEOWNERS` 做最小 owner
 路由，Dependabot 只维护 GitHub Actions，跨仓复用走 reusable workflows，已经
 存在的 OIDC/WIF 继续保留。当前先这样，不额外加 repo-local 守门胶水；后续一边

@@ -1,0 +1,7 @@
+{
+  "name": "Self-hosted Linux CI (org ARM64 runners)",
+  "description": "CI on the ihouse-corp self-hosted ARM64 Linux pool (runner group jclaw-linux-ci) with an apt-based tool bootstrap; no GitHub-hosted minutes.",
+  "iconName": "octicon server",
+  "categories": ["Continuous integration", "Go", "JavaScript", "TypeScript"],
+  "filePatterns": ["go.mod$", "package.json$"]
+}
