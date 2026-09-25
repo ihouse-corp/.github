@@ -1,0 +1,70 @@
+# CI on the org self-hosted ARM64 Linux pool (ARC scale set, runner group jclaw-linux-ci).
+#
+# Before using it:
+#   - ask an org owner to add the repository to runner group "jclaw-linux-ci";
+#   - optionally set the repository/org variable LINUX_CI_RUNNER to another pool label
+#     (projects usually rename it, e.g. JCLAW_LINUX_CI_RUNNER, JPHONE_LINUX_CI_RUNNER).
+# The runners are minimal (actions-runner image, passwordless sudo, no Docker, ARM64):
+#   - do not assume GitHub-hosted preinstalled tools; install them in "Ensure runner tools";
+#   - actions/setup-go and actions/setup-node work on arm64; cross-compile for amd64 targets
+#     (e.g. CGO_ENABLED=0 GOOS=linux GOARCH=amd64) instead of asking for an amd64 runner;
+#   - jobs that really need Docker or amd64 use the heavy pool
+#     (vars.JCLAW_LINUX_HEAVY_RUNNER || 'gx10-jclaw-org-docker-amd64', runner group
+#     jclaw-linux-heavy), which the repository must be granted separately;
+#   - runners are shared: write keys/credentials under $RUNNER_TEMP (never ~/.ssh) and
+#     remove them in an `if: always()` step.
+name: CI
+
+on:
+  push:
+  pull_request:
+    branches: [$default-branch]
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    shell: bash
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ${{ vars.LINUX_CI_RUNNER || 'gx10-jclaw-org-ci-arm64' }}
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      # "command:apt-package" pairs; add what the job needs (curl:curl, jq:jq, rsync:rsync,
+      # ssh:openssh-client, shellcheck:shellcheck, file:file, gcc:gcc ...).
+      - name: Ensure runner tools
+        run: |
+          set -euo pipefail
+          missing=()
+          for pair in curl:curl jq:jq; do
+            command -v "${pair%%:*}" >/dev/null 2>&1 || missing+=("${pair#*:}")
+          done
+          if [ "${#missing[@]}" -eq 0 ]; then echo "all present"; exit 0; fi
+          if [ "$(id -u)" -eq 0 ]; then as_root=()
+          elif command -v sudo >/dev/null 2>&1 && sudo -n true 2>/dev/null; then as_root=(sudo -n)
+          else echo "::error::Runner lacks ${missing[*]} and has no passwordless sudo to install them"; exit 1; fi
+          command -v apt-get >/dev/null 2>&1 || { echo "::error::Runner lacks ${missing[*]} and has no apt-get"; exit 1; }
+          echo "Installing: ${missing[*]}"
+          "${as_root[@]}" apt-get update -qq
+          "${as_root[@]}" env DEBIAN_FRONTEND=noninteractive apt-get install -y -qq --no-install-recommends "${missing[@]}"
+
+      # Replace with the project's toolchain, e.g.:
+      # - uses: actions/setup-go@v5
+      #   with:
+      #     go-version-file: go.mod
+      # - run: go vet ./... && go test ./...
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Build and test
+        run: |
+          if [ -f package-lock.json ]; then npm ci && npm test --if-present && npm run build --if-present
+          else echo "Replace this step with the project's build and test commands"; fi
